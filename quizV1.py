@@ -1,6 +1,8 @@
+#Finished version for python 3.8
 import json
 from random import choice
 import os
+
 
 #reading the json file that the questions are kept in
 Q_and_A = json.load(open("famousPerson.json", "r", encoding="utf-8"))
