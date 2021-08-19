@@ -5,13 +5,16 @@
  ## Features that i need to add
  these are all the features i want in V1.
  I will add these in the order they appear
- - [ ] JSON reading
- - [ ] Command line text based questions
- - [ ] tutorial
+ - [x] JSON reading
+ - [x] Command line text based questions
+ - [x] tutorial 
+ - [x] ignore spaces and caps
+
 
 ## Features i could add
 these are things i want to add in later versions
 - [ ] timer
-- [ ] ignore spaces and caps
+- [ ] tkinter UI
+
 
 
