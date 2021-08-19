@@ -12,5 +12,6 @@
 ## Features i could add
 these are things i want to add in later versions
 - [ ] timer
+- [ ] ignore spaces and caps
 
 
