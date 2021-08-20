@@ -7,6 +7,8 @@ import os
 #reading the json file that the questions are kept in
 Q_and_A = json.load(open("famousPerson.json", "r", encoding="utf-8"))
 
+os.system("CLS")
+
 # this allow people who allready know how to play a chance skip the tutorial while letting people who don't know how to play learn how to
 start_input = input(
     "hello and welcome to my quiz\npress enter to begin or type \"?\" to read a tutorial\n")
