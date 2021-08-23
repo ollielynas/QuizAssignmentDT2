@@ -15,9 +15,14 @@ start_input = input(
 if start_input == "?":
     input("you will be given the description of a famous person, you must type their full name and press enter. you do not need to include any titles they may hold\n")
 
+question_counter = 0
 mistakes = 0
 tic = time.perf_counter()
 while True:
+    if question_counter == 10:
+        break
+    question_counter += 1
+    
     os.system("CLS")
     display_list = []
     if len(list(Q_and_A.keys())) == 0:#this part checks if there are any more question left and if not it ends the loop which ends the quiz
@@ -64,4 +69,4 @@ while True:
     input("press enter for next question\n")
 toc = time.perf_counter()
 os.system("CLS")
-input("good job you finished the quiz. you made "+str(mistakes)+f" mistakes and it took you {toc - tic:0.4f} seconds\n")
+input("good job you finished the quiz. you made "+str(mistakes)+f" mistakes and it took you", int(toc - tic), "seconds\n")
