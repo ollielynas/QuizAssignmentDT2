@@ -5,8 +5,8 @@
 <a href="https://docs.google.com/document/d/1YEYmNcoKA3OZtZaOfMmidjnEeX_0ip5HQU4zY-r9T6M/edit?usp=sharing">evidence document link</a>
 
 
- ## Features that i need to add
- these are all the features i want in V1.
+ ## Features that I need to add
+ these are all the features I want in V1.
  I will add these in the order they appear
  - [x] JSON reading
  - [x] Command line text based questions
@@ -14,10 +14,12 @@
  - [x] ignore spaces and caps
 
 
-## Features i could add
-these are things i want to add in later versions
+## Features I could add
+these are things I want to add in later versions
 - [x] timer
-- [ ] tkinter UI
+- [ ] tkinter UI        
+- [ ] ony ask 10 questions but have much more in the json
 
 ## V1
-command line quiz app that asks questions and when you get something wrong it adds a point to a counter before asking you the question again later on
+command line quiz app that asks questions and when you get something wrong it adds a point to a counter before asking you the question again later on the downside of this
+is that it means you will alwase be asked the same questions and the game will not have much replability 
