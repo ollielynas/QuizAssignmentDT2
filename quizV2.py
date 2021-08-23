@@ -1,5 +1,6 @@
 import json
 from random import choice
+import random
 import os
 import time
 
@@ -43,10 +44,22 @@ while True:
             del Q_and_A[answer]#it will also remove the question from the list of questions
             break
         else:
+            
+            while True:
+                if display_list.count("_") == 0:
+                    break
+                letter = random.randint(0, len(display_list)-1)
+                if display_list[letter] == "_":
+                    display_list[letter] = answer_list[letter]
+                    break
+            os.system("CLS")
+            print("incorrect\n+2 sec time penalty")
+            time.sleep(2)
             os.system("CLS")
             print("(",*display_list,")")
             print(question)
             user_input = input("incorrect\n>")
+            processed_input = user_input.replace(" ", "").lower()
             mistakes += 1 
     input("press enter for next question\n")
 toc = time.perf_counter()
