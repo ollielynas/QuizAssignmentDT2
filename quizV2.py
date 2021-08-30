@@ -13,7 +13,7 @@ os.system("CLS")
 start_input = input(
     "hello and welcome to my quiz\npress enter to begin or type \"?\" to read a tutorial\n")
 if start_input == "?":
-    input("you will be given the description of a famous person, you must type their full name and press enter. you do not need to include any titles they may hold\n")
+    input("you will be given the description of a famous person, you must type their full name and press enter. if they have a title eg. \"sir\", you do not need to include it. you do not have to capatalise either. at the end of the game you will be given how long it took you to finish the quiz as your score. \n good luck! \n\n")
 
 question_counter = 0
 mistakes = 0

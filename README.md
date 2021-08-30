@@ -68,12 +68,12 @@ in this version i have added a new wat to handle when the user inputs an incorre
 here is an example of how it looks:
 
 <div id="example">
-(b_l_ g____)<br/>
+(b_l_ &nbsp; g____)<br/>
 who was the founder of microsoft?
 <div id="header"><p>><br></p><div id="cursor"></div></div>
 </div>
 
-in this example the user has entered the wrong answer three times so three of the letters are already filled in for them
+in this example the user has entered the wrong answer three times so three of the letters are already filled in for them. when the user has answered 10 questions they will be told how many mistakes they made and will be showen how long it took them to finish the quiz. their time is their score
 
 
 ## V3
