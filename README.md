@@ -1,14 +1,12 @@
-<div>
+<details>
+  <summary id = "css">css is disabled in this preview</summary>
+
 <style>
 #header {
   display: flex;
   align-items: baseline;
   margin: 15px;
-
 }
-
-
- /* blinking cursor */
 #cursor {
   background: lime;
   line-height: 17px;
@@ -17,20 +15,24 @@
   width: 7px;
   height: 15px;
 }
-
 #example {
     background-colour: black;
+}
+
+#css{
+    background-color: rgba(0,0,0,0.0);
+    color: rgba(0,0,0,0.0);
+
 }
 
 @-webkit-keyframes blink {
   0% {background: #222}
   50% {background: white}
   100% {background: #222}
-
 }
-</div>
-<style>this css will not work in github but I liked what it did so I left it in  
+
 </style>
+</details>
 
 # QuizAssignmentDT2
  My plan is to create a word answer quiz app that can use a JSON files to produce a the questions and answers. inside the json file there will be a dictionary of questions and answers. the program will read the file and will be able to use it to produce a quiz. The quiz will be about the names of famous people. the user will answer by writing the name of the person. The user will be giveen a description of the person. They will have have to input the person's name into the command line. I also hope to at some point advance it from a command line app to a UI based app. 
