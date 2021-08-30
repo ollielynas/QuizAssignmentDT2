@@ -1,3 +1,4 @@
+<div>
 <style>
 #header {
   display: flex;
@@ -27,7 +28,7 @@
   100% {background: #222}
 
 }
-
+</div>
 <style>this css will not work in github but I liked what it did so I left it in  
 </style>
 
