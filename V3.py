@@ -1,10 +1,11 @@
 import tkinter as tk
-
+import json
 
 root = tk.Tk()
 c=tk.Canvas(root)
 
-c.create_line(0, 100, root.winfo_width(), 100)
+Q_and_A = json.load(open("famousPersonv2.json", "r", encoding="utf-8"))
+
 
 c.pack(expand=True, fill=tk.BOTH)
 

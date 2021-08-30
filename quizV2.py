@@ -69,4 +69,4 @@ while True:
     input("press enter for next question\n")
 toc = time.perf_counter()
 os.system("CLS")
-input("good job you finished the quiz. you made "+str(mistakes)+f" mistakes and it took you", int(toc - tic), "seconds\n")
+input(("good job you finished the quiz. you made "+str(mistakes)+f" mistakes and it took you", int(toc - tic), "seconds\n"))
