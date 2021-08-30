@@ -70,7 +70,7 @@ who was the founder of microsoft?
 <div id="header"><p>><br></p><div id="cursor"></div></div>
 </div>
 
-in this example the user has entered the wrong answer three times so three of te letters are already filled in for them
+in this example the user has entered the wrong answer three times so three of the letters are already filled in for them
 
 
 ## V3
