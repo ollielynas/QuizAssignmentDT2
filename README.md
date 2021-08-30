@@ -3,7 +3,7 @@
   display: flex;
   align-items: baseline;
   margin: 15px;
-this css will not work in github but i liked what it did so i left it in  
+
 }
 
 
@@ -28,6 +28,7 @@ this css will not work in github but i liked what it did so i left it in
 
 }
 
+<style>this css will not work in github but I liked what it did so I left it in  
 </style>
 
 # QuizAssignmentDT2
