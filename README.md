@@ -3,6 +3,7 @@
   display: flex;
   align-items: baseline;
   margin: 15px;
+this css will not work in github but i liked what it did so i left it in  
 }
 
 
@@ -24,8 +25,6 @@
   0% {background: #222}
   50% {background: white}
   100% {background: #222}
-
-
 
 }
 
