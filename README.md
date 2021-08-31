@@ -5,7 +5,7 @@
 #header {
   display: flex;
   align-items: baseline;
-  margin: 15px;
+  margin: 0px;
 }
 #cursor {
   background: lime;
