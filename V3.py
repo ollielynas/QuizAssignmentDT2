@@ -1,6 +1,7 @@
 import tkinter as tk
 import json
 import time
+import random
 root = tk.Tk()
 c=tk.Canvas(root)
 
@@ -12,11 +13,29 @@ def configure(event): # this event will be trigered when you resize the window s
         start.place(x = (root.winfo_width()//2)-(start.winfo_width()//2), y = (root.winfo_height()//2)-(start.winfo_height()//2))
     elif state == "countdown":
         countdown.place(x = (root.winfo_width()//2)-(countdown.winfo_width()//2), y = (root.winfo_height()//2)-(countdown.winfo_height()//2))
+    elif state == "playing":
+        question.place(x=(root.winfo_width()//2)-(question.winfo_width()//2), y = 30)
 
 
 root.bind("<Configure>", configure) 
 
+def newQuestion(oldquestion):
 
+    if oldquestion != " ":
+        del Q_and_A[oldquestion]
+
+    str_answer = random.choice(list(Q_and_A.keys()))
+    str_question = (Q_and_A[str_answer])
+
+    
+    display_list = []
+    answer_list = list(str_answer)
+    for i in answer_list:
+        if i == " ":
+            display_list.append(" ")
+        else:
+            display_list.append("_")
+    return(str_question, str_answer, display_list)
 
 def gameloop():
     global state
@@ -37,27 +56,41 @@ def gameloop():
     min = 0
     sec = 0
     mls = 0
-    timer = tk.Label(root, text="00:00.00", font=("Courier", 17))
+    timer = tk.Label(root, text="", font=("Courier", 17))
     timer.place(x = 10, y = 0)
     starttime = time.perf_counter()
+
+    question.place(x = -100, y = -100)  # see explanation [1]
+    root.update()
+    print("question width =",question.winfo_width())
+    question.place(x=(root.winfo_width()//2)-(question.winfo_width()//2), y = 10+timer.winfo_height())
+    root.update()
+
+    str_question_and_answer = newQuestion(" ")
+
+    question.config(text=str_question_and_answer[0])
+
+
+
+    gridDimentions = [root.winfo_width() - 10, root.winfo_height()-question.winfo_height()+10]
+
     while True:
         mls = time.perf_counter() - starttime
-        sec = mls//100
+        print(mls)
+        sec = mls
         mls = mls - (mls//100)*100
         min = sec//60
-        sec = sec-(sec//60)
+        sec = sec-(sec//60)*60
         root.update()
+        
 
-        if mls < 10:
-            strmls = "0"+str(round(mls, 2))
-        else: strmls = str(round(mls, 2))
         if sec < 10:
             strsec = "0"+str(sec)
         else: strsec = str(sec)
         if min < 10:
             strmin = "0"+str(min)
         else: strmin = str(min)
-        timer.config(text=strmin+":"+strsec+"."+strmls)
+        timer.config(text=strmin+":"+strsec)
         mls += 1
         time.sleep(0.01)
 Q_and_A = json.load(open("famousPersonv2.json", "r", encoding="utf-8"))
@@ -65,6 +98,8 @@ Q_and_A = json.load(open("famousPersonv2.json", "r", encoding="utf-8"))
 welcome = tk.Label(root, text="Welcome to my quizz game!", font=("Courier", 27))
 countdown = tk.Label(root, text="", font=("Courier", 40))
 start = tk.Button(root, text="Start", font=("Courier", 27), command=gameloop)
+question = tk.Label(root, text="", font=("Courier", 27))
+
 
 welcome.pack(padx=20, pady=20)
 
