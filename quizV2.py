@@ -15,6 +15,30 @@ start_input = input(
 if start_input == "?":
     input("you will be given the description of a famous person, you must type their full name and press enter. if they have a title eg. \"sir\", you do not need to include it. you do not have to capatalise either. at the end of the game you will be given how long it took you to finish the quiz as your score. \n good luck! \n\n")
 
+def incorrect():
+            global mistakes, processed_input
+            while True:
+                if display_list.count("_") == 0:
+                    break
+                letter = random.randint(0, len(display_list)-1)
+                if display_list[letter] == "_":
+                    display_list[letter] = answer_list[letter]
+                    break
+            os.system("CLS")
+            print("incorrect\n+2 sec time penalty")
+            time.sleep(2)
+            os.system("CLS")
+            print("(",*display_list,")")
+            print(question)
+            user_input = input("incorrect\n>")
+            processed_input = user_input.replace(" ", "").lower()
+            mistakes += 1 
+
+def correct():
+        print("correct") #this will run if they are right
+        del Q_and_A[answer] #it will also remove the question from the list of questions
+
+
 question_counter = 0
 mistakes = 0
 tic = time.perf_counter()
@@ -38,34 +62,16 @@ while True:
 
     print("(",*display_list,")")
     user_input = input(question+"\n>")
-
     #this part mean that if the user adds an extra space before they answer or they capitalize their answer it will still be seen as correct
     processed_input = user_input.replace(" ", "").lower()
     processed_answer = answer.replace(" ", "").lower()
     
     while True:
         if processed_answer == processed_input:
-            print("correct")#this will run if they are right
-            del Q_and_A[answer]#it will also remove the question from the list of questions
+            correct()
             break
         else:
-            
-            while True:
-                if display_list.count("_") == 0:
-                    break
-                letter = random.randint(0, len(display_list)-1)
-                if display_list[letter] == "_":
-                    display_list[letter] = answer_list[letter]
-                    break
-            os.system("CLS")
-            print("incorrect\n+2 sec time penalty")
-            time.sleep(2)
-            os.system("CLS")
-            print("(",*display_list,")")
-            print(question)
-            user_input = input("incorrect\n>")
-            processed_input = user_input.replace(" ", "").lower()
-            mistakes += 1 
+            incorrect()
     input("press enter for next question\n")
 toc = time.perf_counter()
 os.system("CLS")
