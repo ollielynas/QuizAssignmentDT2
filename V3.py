@@ -2,116 +2,85 @@ import tkinter as tk
 import json
 import time
 import random
-root = tk.Tk()
-c=tk.Canvas(root)
-
-state = "start" # this vairable will let me see what stage of the game is being played
-
-def configure(event): # this event will be trigered when you resize the window so that i can move the item in it to fit the new size
-    root.update()
-    if state == "start":
-        start.place(x = (root.winfo_width()//2)-(start.winfo_width()//2), y = (root.winfo_height()//2)-(start.winfo_height()//2))
-    elif state == "countdown":
-        countdown.place(x = (root.winfo_width()//2)-(countdown.winfo_width()//2), y = (root.winfo_height()//2)-(countdown.winfo_height()//2))
-    elif state == "playing":
-        question.place(x=(root.winfo_width()//2)-(question.winfo_width()//2), y = 30)
 
 
-root.bind("<Configure>", configure) 
+from threading import Thread
 
-def newQuestion(oldquestion):
+class timer(Thread):
+    def __init__(self):
+        Thread.__init__(self)
+        self.daemon = True
+        self.start()
+    def run(self):
+        startTime = time.perf_counter()
+        while True:
+            currentTime = time.perf_counter()-startTime
+            print(currentTime)
+            time.sleep(0.1)
 
-    if oldquestion != " ":
-        del Q_and_A[oldquestion]
-
-    str_answer = random.choice(list(Q_and_A.keys()))
-    str_question = (Q_and_A[str_answer])
-
-    
-    display_list = []
-    answer_list = list(str_answer)
-    for i in answer_list:
-        if i == " ":
-            display_list.append(" ")
-        else:
-            display_list.append("_")
-    return(str_question, str_answer, display_list)
-
-def gameloop():
-    global state
-    start.place_forget()
-    state = ""
-    welcome.pack_forget()
-    root.update()
-    countdown.place(x = -100, y = -100) # see explanation [1]
-    print("state =",state)
-    state = "countdown"
-    countdown.place(x = (root.winfo_width()//2)-(countdown.winfo_width()//2), y = (root.winfo_height()//2)-(countdown.winfo_height()//2))
-    for i in range(5):
-        countdown.config(text=str(5-i))
-        root.update()
-        time.sleep(1)
-    state = "playing"
-    countdown.place_forget()
-    min = 0
-    sec = 0
-    mls = 0
-    timer = tk.Label(root, text="", font=("Courier", 17))
-    timer.place(x = 10, y = 0)
-    starttime = time.perf_counter()
-
-    question.place(x = -100, y = -100)  # see explanation [1]
-    root.update()
-    print("question width =",question.winfo_width())
-    question.place(x=(root.winfo_width()//2)-(question.winfo_width()//2), y = 10+timer.winfo_height())
-    root.update()
-
-    str_question_and_answer = newQuestion(" ")
-
-    question.config(text=str_question_and_answer[0])
-
-
-
-    gridDimentions = [root.winfo_width() - 10, root.winfo_height()-question.winfo_height()+10]
-
-    while True:
-        mls = time.perf_counter() - starttime
-        print(mls)
-        sec = mls
-        mls = mls - (mls//100)*100
-        min = sec//60
-        sec = sec-(sec//60)*60
-        root.update()
-        
-
-        if sec < 10:
-            strsec = "0"+str(sec)
-        else: strsec = str(sec)
-        if min < 10:
-            strmin = "0"+str(min)
-        else: strmin = str(min)
-        timer.config(text=strmin+":"+strsec)
-        mls += 1
-        time.sleep(0.01)
+# reading the json file that the questions are kept in
 Q_and_A = json.load(open("famousPersonv2.json", "r", encoding="utf-8"))
 
-welcome = tk.Label(root, text="Welcome to my quizz game!", font=("Courier", 27))
-countdown = tk.Label(root, text="", font=("Courier", 40))
-start = tk.Button(root, text="Start", font=("Courier", 27), command=gameloop)
-question = tk.Label(root, text="", font=("Courier", 27))
+root = tk.Tk()
 
 
-welcome.pack(padx=20, pady=20)
+def checkAnswer():
+    global Q_and_A, answer
+
+    # this tells the computer to read from the answerbox starting from the first charcter and ending on the secound to last charcter. this is so that it dosen't
+    # include the last charcter
+    rawInupt = answerBox.get()
+    processedInput = rawInupt.replace(' ', '').lower()
+
+    if processedInput == answer.replace(' ', '').lower():
+        print("correct")
+
+    answerBox.delete(0, tk.END)
+
+    del Q_and_A[answer]
+
+    newQuestion()
 
 
+def newQuestion():
+    global Q_and_A, answer
 
-root.minsize(1000, 700)
-start.place(x = -100, y = -100)
-# [1]
-#this is here because i need to know thw the width of the button but you can't know what that is before it is drawn. 
-#to get arround this i fraw it off screan first and then get the size befor moveing it to where i want it.
-root.update()
-start.place(x = (root.winfo_width()//2)-(start.winfo_width()//2), y = (root.winfo_height()//2)-(start.winfo_height()//2))
-print("width =",start.winfo_width())
-c.pack(expand=True, fill=tk.BOTH)
+    answer = random.choice(list(Q_and_A.keys()))
+    question = Q_and_A[answer]
+
+    text.config(text=question)
+
+    # this pice of code will make the font smaller if the question is too big to fit on the screen
+    fontsize = 24
+    text.config(font=("Courier", fontsize))
+    root.update()
+
+    while text.winfo_width() == root.winfo_width():
+        fontsize -= 1
+        text.config(font=("Courier", fontsize))
+        root.update()
+
+
+def startFunc():
+    start.destroy()
+    # this variable will give me a refrense time of when the user started
+
+    answerBox.pack()
+    submitButton.pack(pady=30)
+    timer()
+    newQuestion()
+
+
+submitButton = tk.Button(text="Submit", font=(
+    "Courier", 24), command=lambda: checkAnswer())
+answerBox = tk.Entry(root, text="Placeholder text", font=("Courier", 24))
+text = tk.Label(root, text="Welcome to \"Famous Person quiz 2021\"",
+                anchor='center', font=("Courier", 24))
+text.pack(pady=30)
+answer = ""
+start = tk.Button(root, text="Click here to begin", anchor='center', font=(
+    "Courier", 12), command=lambda: startFunc())
+start.pack(pady=30)
+
+root.geometry("1000x700")
 root.mainloop()
