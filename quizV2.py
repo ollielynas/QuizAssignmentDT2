@@ -15,14 +15,14 @@ start_input = input(
 if start_input == "?":
     input("you will be given the description of a famous person, you must type their full name and press enter. if they have a title eg. \"sir\", you do not need to include it. you do not have to capatalise either. at the end of the game you will be given how long it took you to finish the quiz as your score. \n good luck! \n\n")
 
-def incorrect():
+def incorrect():# this function is called is the user gets the answer wrong
             global mistakes, processed_input
             while True:
                 if display_list.count("_") == 0:
                     break
                 letter = random.randint(0, len(display_list)-1)
                 if display_list[letter] == "_":
-                    display_list[letter] = answer_list[letter]
+                    display_list[letter] = answer_list[letter] #tells the user another of the letters and then asks the question again
                     break
             os.system("CLS")
             print("incorrect\n+2 sec time penalty")
@@ -67,7 +67,7 @@ while True:
     processed_answer = answer.replace(" ", "").lower()
     
     while True:
-        if processed_answer == processed_input:
+        if processed_answer == processed_input: #comapares the users input to the given answer
             correct()
             break
         else:

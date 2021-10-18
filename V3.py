@@ -6,7 +6,7 @@ import random
 
 from threading import Thread
 
-class timer(Thread):
+class timer(Thread):# the  timer is run on a different thread so that it works at a constant rate no matter what the rest of the code is doing
     def __init__(self):
         Thread.__init__(self)
         self.daemon = True
