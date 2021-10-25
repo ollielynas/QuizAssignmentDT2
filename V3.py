@@ -6,17 +6,20 @@ import random
 
 from threading import Thread
 
-class timer(Thread):# the  timer is run on a different thread so that it works at a constant rate no matter what the rest of the code is doing
+
+class timer(Thread):  # the  timer is run on a different thread so that it works at a constant rate no matter what the rest of the code is doing
     def __init__(self):
         Thread.__init__(self)
         self.daemon = True
         self.start()
+
     def run(self):
         startTime = time.perf_counter()
         while True:
             currentTime = time.perf_counter()-startTime
-            print(currentTime)
             time.sleep(0.1)
+            timerLabel.config(text=round(currentTime, 2))
+
 
 # reading the json file that the questions are kept in
 Q_and_A = json.load(open("famousPersonv2.json", "r", encoding="utf-8"))
@@ -34,12 +37,14 @@ def checkAnswer():
 
     if processedInput == answer.replace(' ', '').lower():
         print("correct")
+        del Q_and_A[answer]
+        newQuestion()
+    else:
+        print("incorrect")
 
-    answerBox.delete(0, tk.END)
+    answerBox.delete(0, tk.END)#clears the answer box
 
-    del Q_and_A[answer]
 
-    newQuestion()
 
 
 def newQuestion():
@@ -64,13 +69,13 @@ def newQuestion():
 def startFunc():
     start.destroy()
     # this variable will give me a refrense time of when the user started
-
+    timerLabel.pack(side = tk.LEFT, anchor=tk.NW)
     answerBox.pack()
     submitButton.pack(pady=30)
     timer()
     newQuestion()
 
-
+timerLabel = tk.Label(root, text="0.00", font=("Courier", 12))
 submitButton = tk.Button(text="Submit", font=(
     "Courier", 24), command=lambda: checkAnswer())
 answerBox = tk.Entry(root, text="Placeholder text", font=("Courier", 24))
@@ -81,6 +86,8 @@ answer = ""
 start = tk.Button(root, text="Click here to begin", anchor='center', font=(
     "Courier", 12), command=lambda: startFunc())
 start.pack(pady=30)
+
+
 
 root.geometry("1000x700")
 root.mainloop()
