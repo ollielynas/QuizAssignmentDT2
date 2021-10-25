@@ -24,7 +24,6 @@ class timer(Thread):  # the  timer is run on a different thread
             currentTime = time.perf_counter()-startTime
             time.sleep(0.1)
             timerLabel.config(text=round(currentTime, 2))
-            root.update()
 
 # reading the json file that the questions are kept in
 Q_and_A = json.load(open("famousPersonv2.json", "r", encoding="utf-8"))
@@ -91,7 +90,7 @@ def newQuestion():
         packStartMenu()
         endScore.config(text="your score is: "+str(round(currentTime, 2))+"s")
         endScore.pack(pady=20)
-        text.config(text="Congratulations on completeing the quiz")
+        text.config(text="Congratulations on completing the quiz")
         start.config(text="CLick here to restart")
         Q_and_A = json.load(open("famousPersonv2.json", "r", encoding="utf-8"))
         return
@@ -148,7 +147,7 @@ start = tk.Button(root, text="Click here to begin", anchor='center', font=(
 
 
 endScore = tk.Label(root, text="your final score is:",
-                    anchor='center', font=("Courier", 14))
+                    anchor='center', font=("Courier", 16))
 
 
 def packStartMenu():
