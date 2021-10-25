@@ -1,3 +1,10 @@
+Check results
+=============
+
+
+
+Code
+=============
 import tkinter as tk
 import json
 import time
@@ -137,8 +144,6 @@ numberOfQuestions = 0
 timerLabel = tk.Label(root, text="0.00", font=("Courier", 12), padx=10)
 submitButton = tk.Button(text="Submit", font=(
     "Courier", 24), command=lambda: checkAnswer())
-root.bind('<Return>',lambda event:checkAnswer())
-
 answerBox = tk.Entry(root, text="Placeholder text", font=("Courier", 24))
 text = tk.Label(root, text="Welcome to \"Famous Person quiz 2021\"",
                 anchor='center', font=("Courier", 24))

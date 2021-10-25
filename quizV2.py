@@ -5,7 +5,7 @@ import os
 import time
 
 #reading the json file that the questions are kept in
-Q_and_A = json.load(open("famousPerson.json", "r", encoding="utf-8"))
+Q_and_A = json.load(open("famousPersonv2.json", "r", encoding="utf-8"))
 
 os.system("CLS")
 
@@ -15,7 +15,7 @@ start_input = input(
 if start_input == "?":
     input("you will be given the description of a famous person, you must type their full name and press enter. if they have a title eg. \"sir\", you do not need to include it. you do not have to capatalise either. at the end of the game you will be given how long it took you to finish the quiz as your score. \n good luck! \n\n")
 
-def incorrect():# this function is called is the user gets the answer wrong
+def incorrect():# this function is called when the user gets the answer wrong
             global mistakes, processed_input
             while True:
                 if display_list.count("_") == 0:
