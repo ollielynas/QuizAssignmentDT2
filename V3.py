@@ -35,7 +35,7 @@ def checkAnswer():  # ANCHOR cheack answer
     global Q_and_A, answer, numberOfQuestions
 
     # this tells the computer to read from the answerbox starting
-    #  from the first charcter and ending on the secound to last charcter.
+    # from the first charcter and ending on the secound to last charcter.
     # this is so that it dosen't include the last charcter
     rawInupt = answerBox.get()
 
