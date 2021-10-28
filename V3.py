@@ -32,7 +32,7 @@ file.close()
 
 root = tk.Tk()
 
-
+# cheaks if the answer is correct
 def checkAnswer():  # ANCHOR cheack answer
     global Q_and_A, answer, numberOfQuestions
 
@@ -79,7 +79,7 @@ def checkAnswer():  # ANCHOR cheack answer
         submitButton["state"] = tk.NORMAL
         newQuestion()
 
-
+# genorates a new question
 def newQuestion():
     global Q_and_A, answer, numberOfQuestions, currentTime
     numberOfQuestions += 1
@@ -153,7 +153,7 @@ start = tk.Button(root, text="Click here to begin", anchor='center', font=(
 endScore = tk.Label(root, text="your final score is:",
                     anchor='center', font=("Courier", 16))
 
-
+# packs the elemts of the start menu
 def packStartMenu():
     text.pack(pady=50)
     start.pack(pady=40)
